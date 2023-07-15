@@ -1,0 +1,18 @@
+
+SELECT "Couriers".login, COUNT(*) AS orders_count
+FROM "Orders"
+JOIN "Couriers" ON "Orders"."courierId" = "Couriers".id
+WHERE "Orders"."inDelivery" = 't'
+GROUP BY "Couriers".login;
+
+
+SELECT track,
+       CASE
+           WHEN finished = true THEN 2
+           WHEN cancelled = true THEN -1
+           WHEN "inDelivery" = true THEN 1
+           ELSE 0
+       END AS status
+FROM "Orders";
+
+
